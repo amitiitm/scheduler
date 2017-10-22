@@ -11,10 +11,10 @@ namespace :scheduler do
 		days_left = (Date.parse(DATE) - Date.today).to_i
 		start_date = Date.parse "01-01-#{Date.today.year}"
 		end_date = Date.parse "#{Time.now}"
-		days_left_in_current_year = (end_date - start_date).to_i
+		days_left_in_new_year = (Time.days_in_year - (end_date - start_date).to_i).to_i
 		if days_left > 0
 			days_left = number_with_delimiter((Date.parse(DATE) - Date.today).to_i)
-			message = "#{days_left} days / #{days_left_in_current_year} days"
+			message = "#{days_left} days / #{days_left_in_new_year} days"
 			## call twilio sms method defined in lib/twilio.rb to deliver sms
 			result = Twilio.send_sms(message,MOBILE)
 			## simply printing the output of sms function it can be success or exception message
